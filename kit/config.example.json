@@ -1,0 +1,31 @@
+{
+  "worldPath": "C:/path/to/your/server/world",
+  "usercachePath": "",
+  "resolveNames": false,
+
+  "server": "My SMP",
+  "season": "Season 1",
+  "logo": "",
+  "theme": "ember",
+  "customAccent": null,
+
+  "sections": {
+    "playtime": true,
+    "deaths": true,
+    "grind": true,
+    "palette": true,
+    "combat": true,
+    "movement": true,
+    "life": true,
+    "awards": true
+  },
+
+  "awards": {
+    "disable": [],
+    "custom": [
+      { "key": "pyro", "title": "The Pyromaniac", "desc": "Most TNT detonated", "icon": "bomb", "metric": "tnt", "unit": "TNT" }
+    ]
+  },
+
+  "output": "dist-site"
+}
