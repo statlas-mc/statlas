@@ -1,8 +1,30 @@
-# Statlas
+<p align="center">
+  <img src="docs/hero.svg" alt="Statlas — a season-in-review site for your Minecraft server" width="100%">
+</p>
+
+<p align="center">
+  <b><a href="https://statlas-mc.github.io/statlas/">🎮 Open the generator</a></b> &nbsp;·&nbsp;
+  <b><a href="https://statlas-mc.github.io/max-smp/">🔥 See a live example</a></b>
+</p>
+
+<p align="center">
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-ff8a3d">
+  <img alt="No plugin required" src="https://img.shields.io/badge/plugin-none%20needed-22c55e">
+  <img alt="Runs in your browser" src="https://img.shields.io/badge/privacy-runs%20in%20your%20browser-0ea5e9">
+  <img alt="Static site" src="https://img.shields.io/badge/hosting-free%20static%20site-a78bfa">
+</p>
+
+---
 
 Turn any Minecraft server's vanilla world stats into a **shareable season recap** —
 a personal, animated stats site for every player, plus server-wide superlatives and
-leaderboards. Two ways to use it:
+leaderboards. **No plugin, no signup, no data upload** — everything is parsed in your
+browser, and you export one file you can host anywhere for free.
+
+> **Try it in 10 seconds:** open the [generator](https://statlas-mc.github.io/statlas/)
+> and click **“Try with sample data”** — no world folder needed.
+
+Two ways to use it:
 
 1. **No-install web app** — drag your world folder into the browser, customize (theme,
    sections, awards, branding), preview live, and download a ready-to-host site. Your

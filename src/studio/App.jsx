@@ -6,7 +6,7 @@ import { Icon } from '../renderer/ui.jsx'
 import { parseFiles, resolveNamesOnline } from './parse.js'
 import DeployGuide from './DeployGuide.jsx'
 
-export const BUILD = '2026-07-21.3'
+export const BUILD = '2026-07-21.4'
 const ICON_CHOICES = ['trophy', 'skull', 'pickaxe', 'hammer', 'compass', 'bomb', 'coins', 'sword', 'swords', 'drumstick', 'wand', 'ghost', 'chest', 'sheep', 'spring', 'clock', 'flame', 'wave', 'sparkles']
 
 export default function App() {
@@ -77,7 +77,24 @@ export default function App() {
     setBusy(false)
   }
 
-  if (phase === 'upload') return <Upload onFiles={handleFiles} busy={busy} status={status} />
+  async function loadSample() {
+    setBusy(true); setStatus('Loading sample server…')
+    try {
+      const res = await fetch(`${import.meta.env.BASE_URL}sample-data.json`)
+      if (!res.ok) throw new Error('sample not found')
+      const sample = await res.json()
+      setConfig((c) => ({ ...c, server: 'Max SMP', season: 'Season 3' }))
+      setInputs({ statsByUuid: sample.statsByUuid, advByUuid: sample.advByUuid || {}, namesByUuid: sample.namesByUuid })
+      setStatus(null)
+      setPhase('studio')
+    } catch (e) {
+      console.error('[Statlas] sample load failed:', e)
+      setStatus('Could not load the sample data: ' + (e?.message || e))
+    }
+    setBusy(false)
+  }
+
+  if (phase === 'upload') return <Upload onFiles={handleFiles} onSample={loadSample} busy={busy} status={status} />
 
   return (
     <div className="h-screen flex studio-bg text-[#e8eaf0]">
@@ -99,7 +116,8 @@ export default function App() {
 }
 
 /* ---------------- upload ---------------- */
-function Upload({ onFiles, busy, status }) {
+const DEMO_URL = 'https://statlas-mc.github.io/max-smp/'
+function Upload({ onFiles, onSample, busy, status }) {
   const inputRef = useRef(null)
   const [drag, setDrag] = useState(false)
   const onDrop = async (e) => {
@@ -136,9 +154,22 @@ function Upload({ onFiles, busy, status }) {
             onChange={(e) => onFiles(e.target.files)} />
         </div>
         <p className="text-xs text-[#778] mt-4 leading-relaxed">
-          Needs the <code className="text-accent-soft">stats</code> folder and <code className="text-accent-soft">usercache.json</code>
-          (both are in a standard server folder). <code className="text-accent-soft">advancements</code> is optional.
+          Needs the <code className="text-accent-soft">stats</code> folder. Usernames come from <code className="text-accent-soft">usercache.json</code>
+          if present, or are looked up online. <code className="text-accent-soft">advancements</code> is optional.
         </p>
+
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <span className="h-px w-8 bg-[#333]" /><span className="text-xs text-[#667] uppercase tracking-widest">no folder handy?</span><span className="h-px w-8 bg-[#333]" />
+        </div>
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+          <button className="btn btn-ghost" disabled={busy} onClick={onSample}>
+            <Icon name="sparkles" className="w-4 h-4 text-accent" /> Try with sample data
+          </button>
+          <a href={DEMO_URL} target="_blank" rel="noreferrer" className="btn btn-ghost">
+            <Icon name="compass" className="w-4 h-4 text-accent" /> See a live example
+          </a>
+        </div>
+
         {status && <p className="mt-5 text-sm text-[#cbd]">{status}</p>}
       </div>
     </div>
