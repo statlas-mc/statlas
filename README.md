@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  <b><a href="https://statlas-mc.github.io/statlas/">🎮 Open the generator</a></b> &nbsp;·&nbsp;
-  <b><a href="https://statlas-mc.github.io/max-smp/">🔥 See a live example</a></b>
+  <b><a href="https://statlas-mc.github.io/statlas/">Open the generator</a></b> &nbsp;·&nbsp;
+  <b><a href="https://statlas-mc.github.io/max-smp/">See a live example</a></b>
 </p>
 
 <p align="center">
